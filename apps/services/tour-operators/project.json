@@ -1,0 +1,50 @@
+{
+  "name": "tour-operators",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/services/tour-operators/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/services/tour-operators",
+        "main": "apps/services/tour-operators/src/main.ts",
+        "tsConfig": "apps/services/tour-operators/tsconfig.app.json",
+        "assets": ["apps/services/tour-operators/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/services/tour-operators/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "tour-operators:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "tour-operators:build:development"
+        },
+        "production": {
+          "buildTarget": "tour-operators:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/services/tour-operators/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

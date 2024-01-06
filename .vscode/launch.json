@@ -1,0 +1,30 @@
+{
+  "configurations": [
+    {
+      "type": "msedge",
+      "name": "http:///Users/breldanmuthaka/.nvm/versions/node/v18.17.1/bin/node ./apps/server/dev/packages-service/src/app/services/seed.service.tsUncaught SyntaxError /Users/breldanmuthaka/Desktop/Projects/sohnandsol/sohnsol/apps/server/dev/packages-service/src/app/services/seed.service.ts:1import { Injectable, Logger } from '@nestjs/common';^^^^^^SyntaxError: Cannot use import statement outside a module    at internalCompileFunction (node:internal/vm:73:18)    at wrapSafe (node:internal/modules/cjs/loader:1178:20)    at Module._compile (node:internal/modules/cjs/loader:1220:27)    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)    at Module.load (node:internal/modules/cjs/loader:1119:32)    at Module._load (node:internal/modules/cjs/loader:960:12)    at executeUserEntryPoint (node:internal/modules/run_main:81:12)    at <anonymous> (node:internal/main/run_main_module:23:47)No debugger available, can not send 'variables'Process exited with code 1",
+      "request": "launch",
+      "url": "http:///Users/breldanmuthaka/.nvm/versions/node/v18.17.1/bin/node ./apps/server/dev/packages-service/src/app/services/seed.service.tsUncaught SyntaxError /Users/breldanmuthaka/Desktop/Projects/sohnandsol/sohnsol/apps/server/dev/packages-service/src/app/services/seed.service.ts:1import { Injectable, Logger } from '@nestjs/common';^^^^^^SyntaxError: Cannot use import statement outside a module    at internalCompileFunction (node:internal/vm:73:18)    at wrapSafe (node:internal/modules/cjs/loader:1178:20)    at Module._compile (node:internal/modules/cjs/loader:1220:27)    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)    at Module.load (node:internal/modules/cjs/loader:1119:32)    at Module._load (node:internal/modules/cjs/loader:960:12)    at executeUserEntryPoint (node:internal/modules/run_main:81:12)    at <anonymous> (node:internal/main/run_main_module:23:47)No debugger available, can not send 'variables'Process exited with code 1"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug NestJS",
+      "args": ["--preserve-symlinks"],
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register",
+        "-r",
+        "tsconfig-paths/register"
+      ],
+      "runtimeExecutable": "npm",
+      "program": "${workspaceFolder}/main.ts",
+      "skipFiles": ["<node_internals>/**"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "envFile": "${workspaceFolder}/.env",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "openOnSessionStart"
+    }
+  ]
+}

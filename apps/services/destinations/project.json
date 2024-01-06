@@ -1,0 +1,50 @@
+{
+  "name": "services-destinations",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/services/destinations/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/services/destinations",
+        "main": "apps/services/destinations/src/main.ts",
+        "tsConfig": "apps/services/destinations/tsconfig.app.json",
+        "assets": ["apps/services/destinations/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/services/destinations/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "services-destinations:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "services-destinations:build:development"
+        },
+        "production": {
+          "buildTarget": "services-destinations:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/services/destinations/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

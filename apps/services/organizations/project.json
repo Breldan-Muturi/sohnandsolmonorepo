@@ -1,0 +1,57 @@
+{
+  "name": "services-organizations",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/services/organizations/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/services/organizations",
+        "main": "apps/services/organizations/src/main.ts",
+        "tsConfig": "apps/services/organizations/tsconfig.app.json",
+        "assets": ["apps/services/organizations/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/services/organizations/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "services-organizations:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "services-organizations:build:development"
+        },
+        "production": {
+          "buildTarget": "services-organizations:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/services/organizations/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/services/organizations/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

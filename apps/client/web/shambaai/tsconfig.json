@@ -1,0 +1,45 @@
+{
+  "extends": "../../../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": ["jest", "node"],
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@sohnandsol/ui/shadcn": ["../../../../libs/ui/shadcn/src/index.ts"],
+    //   "@sohnandsol/ui/shadcn/server": [
+    //     "../../../../libs/ui/shadcn/src/server.ts"
+    //   ],
+    //   "@shadcn/ui/*": ["../../../../libs/ui/shadcn/src/*"]
+    // }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "../../../../apps/docs/.next/types/**/*.ts",
+    "../../../../dist/apps/docs/.next/types/**/*.ts",
+    "next-env.d.ts",
+    "../../../../apps/client/web/shambaai/.next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ]
+}

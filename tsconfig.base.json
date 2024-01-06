@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shadcn/*": ["libs/ui/shadcn/src/*"],
+      "@sohnandsol/common-utils": ["libs/common-utils/src/index.ts"],
+      "@sohnandsol/shared-modules": ["libs/shared-modules/src/index.ts"],
+      "@sohnandsol/ui/shadcn": ["libs/ui/shadcn/src/index.ts"],
+      "@sohnandsol/ui/shadcn/server": ["libs/ui/shadcn/src/server.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

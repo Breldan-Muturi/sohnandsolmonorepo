@@ -1,0 +1,2 @@
+export const ORGANIZATIONS_SERVICE = 'ORGANIZATIONS';
+export const USERS_SERVICE = 'USERS';
