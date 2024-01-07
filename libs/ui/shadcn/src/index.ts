@@ -33,6 +33,7 @@ export {
   CommandSeparator,
 } from './components/command';
 export { Popover, PopoverTrigger, PopoverContent } from './components/popover';
+export * from './components/star-rating';
 export * from './icons/google';
 export * from './icons/facebook';
 export * from './icons/linkedIn';

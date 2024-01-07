@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   DestinationsRepository,
   PaginateQueryDto,
+  ReadDestinationsDto,
 } from '@sohnandsol/shared-modules';
 
 @Injectable()
@@ -11,9 +12,11 @@ export class DestinationsService {
     private readonly destinationRepository: DestinationsRepository
   ) {}
 
-  async getPaginatedDestinations(paginateQueryDto: PaginateQueryDto) {
-    return await this.destinationRepository.findPaginated(paginateQueryDto, {
-      relations: ['packages'],
-    });
+  async getPaginatedDestinations(
+    paginateQueryDto: PaginateQueryDto
+  ): Promise<ReadDestinationsDto[]> {
+    return await this.destinationRepository.findDestinationWithManyPackages(
+      paginateQueryDto
+    );
   }
 }

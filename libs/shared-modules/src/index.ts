@@ -28,6 +28,7 @@ export * from './repositories/tour-operators.repository';
 export * from './dto/packages.create.dto';
 export * from './dto/packages.update.dto';
 export * from './dto/destinations.add.dto';
+export * from './dto/destinations.read.dto';
 export * from './dto/users.create.dto';
 export * from './dto/users.update.dto';
 export * from './dto/pagination.query.dto';

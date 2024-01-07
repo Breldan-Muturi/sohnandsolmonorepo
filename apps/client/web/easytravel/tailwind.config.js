@@ -14,6 +14,9 @@ module.exports = {
       fontFamily: {
         opensans: 'var(--font-opensans)',
         caveat: 'var(--font-caveat)',
+        alegrayaLight: 'var(--font-alegraya-light)',
+        alegrayaMedium: 'var(--font-alegraya-medium)',
+        arimo: 'var(--font-arimo)',
       },
     },
   },

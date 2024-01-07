@@ -1,10 +1,10 @@
 import { cn } from '@shadcn/lib/utils';
-import { DestinationEntity } from '@sohnandsol/shared-modules';
+import { ReadDestinationsDto } from '@sohnandsol/shared-modules';
 import Image from 'next/image';
 import React from 'react';
 
 interface DestinationCardProps extends React.HTMLAttributes<HTMLElement> {
-  destination: DestinationEntity;
+  destination: ReadDestinationsDto;
   aspectRatio?: 'portrait' | 'square';
   width?: number;
   height?: number;
@@ -18,7 +18,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
   className,
   ...props
 }) => {
-  const { image, name, packages } = destination;
+  const { image, name, packagesCount } = destination;
   return (
     <div className={cn('space-y-3', className)} {...props}>
       <div className="overflow-hidden rounded-md">
@@ -35,8 +35,8 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
       </div>
       <div className="space-y-1 text-sm">
         <h3 className="font-medium leading-none">{name}</h3>
-        <p className="text-xs text-muted-foreground">{`${packages.length} ${
-          packages.length - 1 > 1 ? 'packages' : 'package'
+        <p className="text-xs text-muted-foreground">{`${packagesCount} ${
+          packagesCount - 1 > 1 ? 'packages' : 'package'
         }`}</p>
       </div>
     </div>

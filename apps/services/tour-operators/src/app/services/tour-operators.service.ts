@@ -16,7 +16,7 @@ export class TourOperatorsService {
     paginateQueryDto: PaginateQueryDto
   ): Promise<[TourOperatorsEntity[], number]> {
     return await this.tourOperatorsRepository.findPaginated(paginateQueryDto, {
-      relations: ['packages'],
+      relations: ['reviews'],
     });
   }
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import {
-  PackagesRepository,
-  TourOperatorsEntity,
+  // PackagesRepository,
+  ReviewEntity,
+  ReviewsRepository,
+  // TourOperatorsEntity,
   TourOperatorsRepository,
 } from '@sohnandsol/shared-modules';
 import { faker } from '@faker-js/faker';
@@ -10,45 +12,35 @@ import { faker } from '@faker-js/faker';
 export class SeedService {
   constructor(
     private readonly tourOperatorsRepository: TourOperatorsRepository,
-    private readonly packagesRepository: PackagesRepository
+    private readonly reviewsRepository: ReviewsRepository
   ) {}
 
-  async seedTourOperators(): Promise<TourOperatorsEntity[]> {
-    const numberOfOperators = 9;
-    const packages = await this.packagesRepository.findAll();
-    const packagesPerOperator = Math.floor(packages.length / numberOfOperators);
-    let extraPackages = packages.length % numberOfOperators;
-    const savedTourOperators: TourOperatorsEntity[] = [];
+  async seedTourOperators() {
+    const tourOperators = await this.tourOperatorsRepository.findAll();
 
-    for (let i = 0; i < numberOfOperators; i++) {
-      const tourOperator: Partial<TourOperatorsEntity> = {
-        name: faker.company.name(),
-        image: faker.image.urlPicsumPhotos({ width: 128, height: 128 }),
-      };
+    for (const operator of tourOperators) {
+      const numberOfReviews = faker.number.int({ min: 2, max: 9 });
+      for (let i = 0; i < numberOfReviews; i++) {
+        const review: Partial<ReviewEntity> = {
+          rating: faker.number.int({ min: 1, max: 5 }),
+          reviewDate: faker.date.between({
+            from: '2019-01-02',
+            to: '2024-01-02',
+          }),
+          reviewPhotos: this.generatePhotos(),
+          review: faker.lorem.sentences({ min: 1, max: 3 }),
+          tourOperator: operator,
+        };
 
-      const savedTourOperator = await this.tourOperatorsRepository.save(
-        tourOperator
-      );
-      const tourOperatorPackages: TourOperatorsEntity['packages'] = [];
-
-      // Determine the number of packages for this operator
-      const numPackages = packagesPerOperator + (extraPackages > 0 ? 1 : 0);
-      extraPackages--;
-
-      // Assign packages to this tour operator
-      for (let j = 0; j < numPackages; j++) {
-        const packageEntity = packages.shift();
-        packageEntity.tourOperator = savedTourOperator;
-        tourOperatorPackages.push(packageEntity);
-        await this.packagesRepository.save(packageEntity);
+        await this.reviewsRepository.save(review);
       }
-
-      // Update the tourOperator with its packages
-      savedTourOperator.packages = tourOperatorPackages;
-      await this.tourOperatorsRepository.save(savedTourOperator);
-      savedTourOperators.push(savedTourOperator);
     }
+  }
 
-    return savedTourOperators;
+  private generatePhotos(): string[] {
+    const numberOfPhotos = faker.number.int({ min: 1, max: 4 });
+    return Array.from({ length: numberOfPhotos }, () =>
+      faker.image.urlLoremFlickr({ category: 'travel' })
+    );
   }
 }

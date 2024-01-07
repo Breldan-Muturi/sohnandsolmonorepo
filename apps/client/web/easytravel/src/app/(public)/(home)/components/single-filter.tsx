@@ -34,7 +34,7 @@ const SingleFilter: React.FC<SingleFilter> = ({ filter, className }) => {
           variant="outline"
           size="lg"
           className={cn(
-            'flex flex-1 py-6 px-4 justify-between items-center rounded-none',
+            'font-arimo flex flex-1 py-6 px-4 justify-between items-center rounded-none',
             className
           )}
         >

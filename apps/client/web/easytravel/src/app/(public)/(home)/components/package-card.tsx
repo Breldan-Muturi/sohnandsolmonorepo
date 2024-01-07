@@ -28,33 +28,32 @@ const PackageCard: React.FC<PackageEntity> = ({
     .map((d) => d.name)
     .join(', ');
   return (
-    <Card className="h-96 col-span-1">
+    <Card className="h-96 col-span-1 rounded-none">
       <div className="w-full h-2/5 relative">
-        <Image
-          src={photos[0]}
-          alt={about}
-          fill
-          className="object-cover rounded-t-lg"
-        />
+        <Image src={photos[0]} alt={about} fill className="object-cover" />
       </div>
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="font-arimo font-bold text-sm">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="list-none space-y-1">
+        <ul className="list-none space-y-1 text-sm">
           <li>
             <p>
-              <span className="font-bold">
+              <span className="font-alegrayaMedium">
                 {destinations?.length > 0 ? 'Destinations: ' : 'Destination: '}
               </span>{' '}
-              {displayedDestinations}
-              {additionalDestinations}
+              <span className="text-gray-500">
+                {displayedDestinations}
+                {additionalDestinations}
+              </span>
             </p>
           </li>
           <li>
             <p>
               <span className="font-bold">Duration: </span>
-              {duration} {`day${duration > 1 ? 's' : ''}`}
+              <span className="text-gray-500">
+                {duration} {`day${duration > 1 ? 's' : ''}`}
+              </span>
             </p>
           </li>
         </ul>

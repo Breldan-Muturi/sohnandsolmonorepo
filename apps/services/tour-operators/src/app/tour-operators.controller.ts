@@ -3,6 +3,7 @@ import { Controller } from '@nestjs/common';
 import { TourOperatorsService } from './services/tour-operators.service';
 import {
   Ctx,
+  EventPattern,
   MessagePattern,
   Payload,
   RmqContext,
@@ -22,12 +23,10 @@ export class TourOperatorsController {
     private readonly seedService: SeedService
   ) {}
 
-  @MessagePattern('seed-tour-operators')
-  async seedTourOperators(
-    @Ctx() context: RmqContext
-  ): Promise<TourOperatorsEntity[]> {
+  @EventPattern('seed-tour-operators')
+  async seedTourOperators(@Ctx() context: RmqContext) {
+    await this.seedService.seedTourOperators();
     this.rmqService.ack(context);
-    return this.seedService.seedTourOperators();
   }
 
   @MessagePattern('get-tour-operators')

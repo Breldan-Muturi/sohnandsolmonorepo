@@ -100,7 +100,7 @@ const Hero = () => {
                 href={href}
                 className={cn(
                   buttonVariants({ variant: 'link' }),
-                  'text-white'
+                  'font-arimo text-white'
                 )}
               >
                 {label}
@@ -111,7 +111,7 @@ const Hero = () => {
             href="http://localhost:3000/dashboard"
             className={cn(
               buttonVariants({ variant: 'ghost' }),
-              'rounded-3xl border-2 border-white text-white'
+              'font-arimo rounded-3xl border-2 border-white text-white'
             )}
           >
             <LucideUserCircle2 className="mr-2" />

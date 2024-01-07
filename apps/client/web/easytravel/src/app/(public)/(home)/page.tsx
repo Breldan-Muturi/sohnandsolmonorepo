@@ -2,11 +2,14 @@ import {
   DestinationEntity,
   PackageEntity,
   PaginateQueryDto,
+  ReadDestinationsDto,
+  TourOperatorsEntity,
 } from '@sohnandsol/shared-modules';
 import Hero from './components/hero';
 import PageSection, { PageSectionProps } from './components/page-section';
 import PackageCard from './components/package-card';
 import DestinationCard from './components/destination-card';
+import TourOperatorsCard from './components/tour-operators-card';
 
 async function getPackages({
   limit = 8,
@@ -37,7 +40,7 @@ async function getPackages({
 async function getDestinations({
   limit = 6,
   offset,
-}: PaginateQueryDto): Promise<DestinationEntity[]> {
+}: PaginateQueryDto): Promise<ReadDestinationsDto[]> {
   'use server';
   let url = 'http://localhost:3003/destinations?';
 
@@ -56,13 +59,40 @@ async function getDestinations({
   if (!res.ok) {
     throw new Error('Failed to fetch data');
   }
-  const [destinations] = await res.json();
+  const destinations = await res.json();
   return destinations;
+}
+
+async function getTourOperators({
+  limit = 9,
+  offset,
+}: PaginateQueryDto): Promise<TourOperatorsEntity[]> {
+  'use server';
+  let url = 'http://localhost:3003/tour-operators?';
+
+  if (limit !== undefined) {
+    url += `limit=${limit}`;
+  }
+  if (offset !== undefined) {
+    if (limit !== undefined) {
+      url += '&';
+    }
+    url += `offset=${offset}`;
+  }
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+  const [tourOperators] = await res.json();
+  return tourOperators;
 }
 
 export default async function Index() {
   const packages = await getPackages({});
   const destinations = await getDestinations({});
+  const tourOperators = await getTourOperators({});
 
   const pageSections: PageSectionProps[] = [
     {
@@ -83,9 +113,23 @@ export default async function Index() {
         <div className="grid grid-cols-6 gap-4">
           {destinations.map((destination, i) => (
             <DestinationCard
-              key={`${i}:${destination.id}`}
+              key={`${i}:${destination.name}`}
               className="col-span-1"
               destination={destination}
+            />
+          ))}
+        </div>
+      ),
+    },
+    {
+      title: 'Tour Operators',
+      href: '/allPackages',
+      children: (
+        <div className="grid grid-cols-3 gap-4">
+          {tourOperators.map((tourOperator, i) => (
+            <TourOperatorsCard
+              key={`${i}-${tourOperator.id}`}
+              tourOperator={tourOperator}
             />
           ))}
         </div>
@@ -94,7 +138,7 @@ export default async function Index() {
   ];
 
   return (
-    <div className="flex flex-col items-center h-screen overflow-y-auto">
+    <>
       <Hero />
       {pageSections.map((pageSection, i) => {
         const { title, href, children, buttonLabel } = pageSection;
@@ -110,6 +154,6 @@ export default async function Index() {
           </PageSection>
         );
       })}
-    </div>
+    </>
   );
 }

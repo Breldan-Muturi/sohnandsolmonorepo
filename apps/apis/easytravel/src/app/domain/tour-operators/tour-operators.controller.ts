@@ -12,7 +12,7 @@ export class TourOperatorsController {
 
   @Post('seed')
   seedTourOperators() {
-    return this.tourOperatorsService.send('seed-tour-operators', {});
+    return this.tourOperatorsService.emit('seed-tour-operators', {});
   }
 
   @Get()
